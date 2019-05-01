@@ -1,0 +1,26 @@
+{
+  "name": "ow-workshop",
+  "version": "1.0.0",
+  "description": "Find cool workshop codes for Overwatch",
+  "author": "Moritz Ruth",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/pwa": "^2.6.0",
+    "cross-env": "^5.2.0",
+    "nuxt": "^2.4.0"
+  },
+  "devDependencies": {
+    "graphql-request": "^1.8.2",
+    "node-sass": "^4.12.0",
+    "nodemon": "^1.18.9",
+    "sass-loader": "^7.1.0",
+    "vue-infinite-loading": "^2.4.4",
+    "vue-markdown": "^2.2.4"
+  }
+}
