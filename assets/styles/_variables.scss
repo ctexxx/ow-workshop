@@ -1,3 +1,7 @@
-$gradient-start: rgb(108, 238, 126);
-$gradient-end: rgb(0, 202, 242);
-$gradient: linear-gradient(166deg, $gradient-start 20%, $gradient-end 100%);
+$link: #0e60cc;
+$gray: #bdbdbd;
+$green: #6cee7e;
+$blue: #00caf2;
+$primary: $green;
+$secondary: $blue;
+$gradient: linear-gradient(166deg, $primary 20%, $secondary 100%);

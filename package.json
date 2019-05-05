@@ -11,17 +11,16 @@
     "generate": "nuxt generate"
   },
   "dependencies": {
-    "@nuxtjs/pwa": "^2.6.0",
-    "cross-env": "^5.2.0",
-    "nuxt": "^2.4.0"
-  },
-  "devDependencies": {
     "graphql-request": "^1.8.2",
     "lodash": "^4.17.11",
     "node-sass": "^4.12.0",
-    "nodemon": "^1.18.9",
+    "@nuxtjs/pwa": "^2.6.0",
+    "cross-env": "^5.2.0",
+    "nuxt": "^2.4.0",
     "sass-loader": "^7.1.0",
-    "vue-infinite-loading": "^2.4.4",
     "vue-markdown": "^2.2.4"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
   }
 }

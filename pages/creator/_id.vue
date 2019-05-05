@@ -26,7 +26,6 @@ query getCreator($id:ID!) {
   `;
 
   export default {
-    name: "creator",
     components: { CreationsList },
     async asyncData(ctx) {
       return {

@@ -6,12 +6,14 @@
       @click="$router.push(`/c/${creation.code}`)"
     >
       <CategoryBadge :category="creation.category"/>
-      <span class="title">{{ creation.title }}</span>
+      <span class="title">{{ creation.title }} - {{ creation.code }}</span>
     </li>
   </ul>
 </template>
 
 <style scoped lang="scss">
+  @import "~@/assets/styles/variables";
+
   .creations-list {
     list-style: none;
 
@@ -20,12 +22,14 @@
     border-radius: 5px;
     overflow: hidden;
 
+    width: 100%;
+
     li {
       padding: 10px;
       cursor: pointer;
 
       &:not(:last-child) {
-        border-bottom: 1px solid #d4d4e1;
+        border-bottom: 1px solid $gray;
       }
 
       .title {

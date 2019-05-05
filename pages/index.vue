@@ -1,5 +1,5 @@
 <template>
-  <main class="container">
+  <main class="box-container">
     <section class="box filter-section">
       <h1 class="title">Filter</h1>
       <h2 class="subtitle">
@@ -11,6 +11,11 @@
       <h2 class="subtitle">
         Category
       </h2>
+      <label class="input">
+        <input type="checkbox" v-model="allCategoriesSelected"/>
+        All
+      </label>
+      <hr class="separator"/>
       <label v-for="category in Object.keys($options.categoryMeta)" class="input">
         <input
           type="checkbox"
@@ -21,11 +26,11 @@
       </label>
     </section>
     <section class="box content-section">
-      <h1 class="title">Creations<span class="spinner" :style="`opacity: ${loading ? 1 : 0}`"></span></h1>
+      <h1 class="title">Creations</h1>
       <CreationsList :creations="creations"/>
-      <button :disabled="loading || allLoaded" class="button" @click="loadNext()">
-        {{ buttonText }}
-      </button>
+      <SimpleButton :disabled="loading || allLoaded" class="button" @click="loadNext()">
+        {{ buttonText }}<LoadingCircle class="loading-circle" v-show="loading" color="#555555"/>
+      </SimpleButton>
     </section>
   </main>
 </template>
@@ -34,25 +39,15 @@
   @import "~@/assets/styles/elements";
   @import "~@/assets/styles/inputs";
 
-  .container {
-    width: 100%;
-    height: 100%;
-    display: flex;
+  .box-container {
     flex-flow: row-reverse;
     flex-wrap: wrap;
     align-items: flex-start;
     align-content: stretch;
-
-    padding: 0;
-
-    @media screen and (min-width: 480px) {
-      padding: 20px;
-    }
   }
 
-  .content-section, .filter-section {
+  .box {
     flex-basis: 0;
-    margin: 20px;
   }
 
   .content-section {
@@ -64,7 +59,7 @@
     }
 
     .title {
-      .spinner {
+      .loading-circle {
         --size: 1.5rem;
         margin-left: 15px;
 
@@ -74,18 +69,22 @@
   }
 
   .filter-section {
-    min-width: fit-content;
     order: 1;
     flex-grow: 1;
+
+    .separator {
+      margin: 10px 0 20px;
+    }
   }
 </style>
 
 <script>
   import api from "@/assets/api";
-  import InfiniteLoading from "vue-infinite-loading";
   import CreationsList from "@/components/CreationsList";
   import categoryMeta from "@/assets/categoryMeta";
   import { debounce } from "lodash";
+  import SimpleButton from "@/components/SimpleButton";
+  import LoadingCircle from "@/components/LoadingCircle";
 
   const CREATIONS_FETCH_COUNT = 10;
 
@@ -102,8 +101,7 @@ query getCreations($count:Int $skip:Int $filter:CreationFilter) {
   const areAllLoaded = (length) => length === 0 || length < CREATIONS_FETCH_COUNT;
 
   export default {
-    name: "index",
-    components: { CreationsList, InfiniteLoading },
+    components: { LoadingCircle, SimpleButton, CreationsList },
     async asyncData () {
       const creations = (await api.request(getCreationsQuery, { count: CREATIONS_FETCH_COUNT, skip: 0 })).allCreations;
 
@@ -143,6 +141,18 @@ query getCreations($count:Int $skip:Int $filter:CreationFilter) {
           return "That’s all."
         } else {
           return "Load more"
+        }
+      },
+      allCategoriesSelected: {
+        set(v) {
+          if(v) {
+            this.categories = Object.keys(categoryMeta);
+          } else {
+            this.categories = [];
+          }
+        },
+        get() {
+          return this.categories.length === Object.keys(categoryMeta).length;
         }
       }
     },
