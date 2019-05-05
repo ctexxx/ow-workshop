@@ -1,0 +1,32 @@
+@import "./variables";
+
+.input {
+  display: block;
+
+  input[type=text] {
+    $border-width: 1px;
+
+    border-radius: 40px;
+    outline: none;
+
+    padding: 10px 20px;
+    font-size: 1rem;
+    letter-spacing: 0.1rem;
+    text-align: center;
+
+    transition: border 200ms ease-out;
+    border: $border-width solid #a9acb9;
+
+    &:focus {
+      border-color: #2eeb37;
+    }
+  }
+
+  input[type=checkbox] {
+    width: 20px;
+    height: 20px;
+
+    position: relative;
+    top: 4px;
+  }
+}

@@ -1,7 +1,17 @@
 <template>
-  <div>
-    <div class="category-filter">
-      <label v-for="category in Object.keys($options.categoryMeta)">
+  <main class="container">
+    <section class="box filter-section">
+      <h1 class="title">Filter</h1>
+      <h2 class="subtitle">
+        Search (title or code)
+      </h2>
+      <label class="input">
+        <input type="text" v-model="search" class="full-width"/>
+      </label>
+      <h2 class="subtitle">
+        Category
+      </h2>
+      <label v-for="category in Object.keys($options.categoryMeta)" class="input">
         <input
           type="checkbox"
           v-model="categories"
@@ -9,28 +19,71 @@
         />
         {{ $options.categoryMeta[category].displayName }}
       </label>
-    </div>
-    <label>
-      Search (title or code)
-      <input type="text" v-model="search"/>
-    </label>
-    <CreationsTable :creations="creations"/>
-    <button v-if="loading" disabled>
-      Loading
-    </button>
-    <button v-else-if="allLoaded" disabled>
-      No more creations
-    </button>
-    <button v-else @click="loadNext()">
-      Load more
-    </button>
-  </div>
+    </section>
+    <section class="box content-section">
+      <h1 class="title">Creations<span class="spinner" :style="`opacity: ${loading ? 1 : 0}`"></span></h1>
+      <CreationsList :creations="creations"/>
+      <button :disabled="loading || allLoaded" class="button" @click="loadNext()">
+        {{ buttonText }}
+      </button>
+    </section>
+  </main>
 </template>
+
+<style lang="scss">
+  @import "~@/assets/styles/elements";
+  @import "~@/assets/styles/inputs";
+
+  .container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: row-reverse;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    align-content: stretch;
+
+    padding: 0;
+
+    @media screen and (min-width: 480px) {
+      padding: 20px;
+    }
+  }
+
+  .content-section, .filter-section {
+    flex-basis: 0;
+    margin: 20px;
+  }
+
+  .content-section {
+    order: 2;
+    flex-grow: 3;
+
+    .button {
+      margin: 10px auto;
+    }
+
+    .title {
+      .spinner {
+        --size: 1.5rem;
+        margin-left: 15px;
+
+        transition: 200ms linear opacity;
+      }
+    }
+  }
+
+  .filter-section {
+    min-width: fit-content;
+    order: 1;
+    flex-grow: 1;
+  }
+</style>
 
 <script>
   import api from "@/assets/api";
   import InfiniteLoading from "vue-infinite-loading";
-  import CreationsTable from "@/components/CreationsTable";
+  import CreationsList from "@/components/CreationsList";
   import categoryMeta from "@/assets/categoryMeta";
   import { debounce } from "lodash";
 
@@ -46,19 +99,23 @@ query getCreations($count:Int $skip:Int $filter:CreationFilter) {
 }
   `;
 
+  const areAllLoaded = (length) => length === 0 || length < CREATIONS_FETCH_COUNT;
+
   export default {
     name: "index",
-    components: { CreationsTable, InfiniteLoading },
+    components: { CreationsList, InfiniteLoading },
     async asyncData () {
+      const creations = (await api.request(getCreationsQuery, { count: CREATIONS_FETCH_COUNT, skip: 0 })).allCreations;
+
       return {
-        creations: (await api.request(getCreationsQuery, { count: CREATIONS_FETCH_COUNT, skip: 0 })).allCreations
+        allLoaded: areAllLoaded(creations.length),
+        creations
       };
     },
     data() {
       return {
         categories: Object.keys(categoryMeta),
         search: "",
-        allLoaded: false,
         loading: false
       }
     },
@@ -78,6 +135,15 @@ query getCreations($count:Int $skip:Int $filter:CreationFilter) {
         }
 
         return filter;
+      },
+      buttonText() {
+        if(this.loading) {
+          return "Loading...";
+        } else if(this.allLoaded) {
+          return "That’s all."
+        } else {
+          return "Load more"
+        }
       }
     },
     methods: {
@@ -98,7 +164,7 @@ query getCreations($count:Int $skip:Int $filter:CreationFilter) {
 
         this.creations.push(...newCreations);
 
-        this.allLoaded = newCreations.length === 0 || newCreations.length < CREATIONS_FETCH_COUNT;
+        this.allLoaded = areAllLoaded(newCreations.length);
 
         this.loading = false;
       }
@@ -106,12 +172,8 @@ query getCreations($count:Int $skip:Int $filter:CreationFilter) {
     watch: {
       filter: debounce(function () {
         this.loadNext(true);
-      }, 500, { maxWait: 1000 })
+      }, 500, { leading: true })
     },
     categoryMeta
   };
 </script>
-
-<style lang="scss">
-
-</style>

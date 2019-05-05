@@ -2,14 +2,14 @@
   <div>
     BattleTag: {{ creator.tag }}<br/>
     Twitter: @{{ creator.twitter }}
-    <CreationsTable :creations="creator.creations"/>
+    <CreationsList :creations="creator.creations"/>
   </div>
 
 </template>
 
 <script>
   import api from "@/assets/api";
-  import CreationsTable from "@/components/CreationsTable";
+  import CreationsList from "@/components/CreationsList";
 
   const getCreatorQuery = `
 query getCreator($id:ID!) {
@@ -27,7 +27,7 @@ query getCreator($id:ID!) {
 
   export default {
     name: "creator",
-    components: { CreationsTable },
+    components: { CreationsList },
     async asyncData(ctx) {
       return {
         creator: (await api.request(getCreatorQuery, { id: ctx.route.params.id })).Creator

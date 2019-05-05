@@ -1,0 +1,83 @@
+@import "./variables";
+
+.box {
+  background: white;
+  border-radius: 5px;
+  box-shadow: 0 0 20px 0 rgba(0,0,0,0.4);
+
+  padding: 40px;
+  margin-bottom: 20px;
+
+  & > .title {
+    font-weight: bold;
+    font-size: 2rem;
+
+    margin: 0 0 20px;
+  }
+
+  & > .subtitle {
+    font-weight: bold;
+    font-size: 1.4rem;
+
+    margin-bottom: 15px;
+  }
+}
+
+.button {
+  display: block;
+
+  border: 2px solid $gradient-start;
+  border-radius: 40px;
+  outline: none;
+
+  padding: 10px 20px;
+
+  background: none;
+
+  color: black;
+  font-size: 1.2rem;
+  height: 53px;
+
+  transition: 500ms ease background-color, 200ms linear border;
+  &:hover:not(:disabled) {
+    background-color: $gradient-start;
+  }
+
+  &:disabled {
+    border: 2px solid $gradient-end;
+  }
+
+  & > .spinner {
+    position: relative;
+    top: 3px;
+    right: 0;
+
+    margin-left: 5px;
+  }
+}
+
+.spinner {
+  --size: 20px;
+  --color: currentColor;
+
+  border: 2px solid var(--color);
+  border-top-color: transparent;
+  border-radius: 50%;
+
+  width: var(--size);
+  height: var(--size);
+  display: inline-block;
+
+  overflow: hidden;
+
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(359deg);
+  }
+}

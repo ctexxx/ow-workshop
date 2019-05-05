@@ -1,27 +1,28 @@
 export default Object.freeze({
   Alternative: {
     displayName: "Alternative",
-    color: "red",
+    backgroundColor: "#ff3643",
+    color: "white",
     description: "Alternative way to play a built-in Overwatch game mode"
   },
   Game: {
     displayName: "Game",
-    color: "yellow",
+    backgroundColor: "#fff43d",
     description: "A whole new game, or a recreation of an existing game outside of Overwatch"
   },
   Surf: {
     displayName: "Lucio Surf",
-    color: "green",
+    backgroundColor: "#58ff25",
     description: "Play as Lucio and reach the finish, but don’t touch the floor"
   },
   Fun: {
     displayName: "Funny",
-    color: "blue",
+    backgroundColor: "#7abaff",
     description: "It doesn’t make any sense, but it’s funny"
   },
   Other: {
     displayName: "Other",
-    color: "gray",
+    backgroundColor: "#d0d0d0",
     description: "No category matches"
   }
 })
