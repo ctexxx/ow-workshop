@@ -3,7 +3,7 @@
     <div class="top-bar">
       <button class="back-button" @click="$router.push('/')">
         <span class="arrow"></span>
-        Back
+        Home
       </button>
     </div>
     <div class="content">
