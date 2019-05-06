@@ -120,7 +120,8 @@ query getCreations($count:Int $skip:Int $filter:CreationFilter) {
       return {
         categories: Object.keys(categoryMeta),
         search: "",
-        loading: false
+        loading: false,
+        latestRequest: null
       }
     },
     computed: {
@@ -164,25 +165,34 @@ query getCreations($count:Int $skip:Int $filter:CreationFilter) {
     },
     methods: {
       async getMoreCreations(dontSkip = false) {
-        return (
-          await api.request(getCreationsQuery, {
-            count: CREATIONS_FETCH_COUNT,
-            skip: dontSkip ? 0 : this.creations.length,
-            filter: this.filter
-          })
-        ).allCreations;
+        if(this.categories.length !== 0) {
+          return (
+            await api.request(getCreationsQuery, {
+              count: CREATIONS_FETCH_COUNT,
+              skip: dontSkip ? 0 : this.creations.length,
+              filter: this.filter
+            })
+          ).allCreations;
+        } else {
+          return [];
+        }
       },
       async loadNext(clear = false) {
+        const timestamp = Date.now();
+        this.latestRequest = timestamp;
+
         this.loading = true;
         const newCreations = await this.getMoreCreations(clear);
 
-        if(clear) this.creations = [];
+        if(this.latestRequest === timestamp) {
+          if(clear) this.creations = [];
 
-        this.creations.push(...newCreations);
+          this.creations.push(...newCreations);
 
-        this.allLoaded = areAllLoaded(newCreations.length);
+          this.allLoaded = areAllLoaded(newCreations.length);
 
-        this.loading = false;
+          this.loading = false;
+        }
       }
     },
     watch: {
