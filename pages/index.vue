@@ -32,18 +32,24 @@
         {{ buttonText }}<LoadingCircle class="loading-circle" v-show="loading" color="#555555"/>
       </SimpleButton>
     </section>
-    <section class="box submit-section">
-      <h1 class="box-title">Submit yours</h1>
-      <p>Use <a rel="noopener" href="https://forms.gle/i4EawBQoXeks3Jtt9">this form</a>.</p>
-      <p>
-        Or, if you have a GitHub account, please
-        <a
-          rel="noopener"
-          href="https://github.com/ctexxx/ow-workshop/issues/new?labels=submission&title=Submission%20[TITLE]&template=submission.md"
-        >create an issue</a>.
-      </p>
-      <small><nuxt-link to="/disclaimer">Disclaimer and Notice of Non-Affiliation</nuxt-link></small>
-    </section>
+    <div class="right-column">
+      <section class="box submit-section">
+        <h1 class="box-title">Submit yours</h1>
+        <p>Use <a rel="noopener" href="https://forms.gle/i4EawBQoXeks3Jtt9">this form</a>.</p>
+        <p>
+          Or, if you have a GitHub account, please
+          <a
+            rel="noopener"
+            href="https://github.com/ctexxx/ow-workshop/issues/new?labels=submission&title=Submission%20[TITLE]&template=submission.md"
+          >create an issue</a>.
+        </p>
+      </section>
+      <section class="box more-section">
+        <h1 class="box-title">More</h1>
+        <span class="entry"><nuxt-link to="/disclaimer">Disclaimer and Notice of Non-Affiliation</nuxt-link></span>
+        <span class="entry"><a href="https://ctexxx.dev">Created by Moritz Ruth</a></span>
+      </section>
+    </div>
   </main>
 </template>
 
@@ -83,9 +89,24 @@
     }
   }
 
-  .submit-section {
-    @include minWidthIfAvailable(200px);
+  .right-column {
+    flex-basis: 0;
     flex-grow: 1;
+
+    .submit-section {
+      @include minWidthIfAvailable(200px);
+      flex-grow: 1;
+    }
+
+    .more-section {
+      .entry {
+        display: block;
+
+        &:not(:last-child) {
+          margin-bottom: 20px;
+        }
+      }
+    }
   }
 </style>
 
