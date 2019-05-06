@@ -1,11 +1,37 @@
 <template>
-  <div>
-    BattleTag: {{ creator.tag }}<br/>
-    Twitter: @{{ creator.twitter }}
-    <CreationsList :creations="creator.creations"/>
+  <div class="box-container">
+    <section class="box">
+      <h1 class="title">Information</h1>
+      <span class="social-tag" v-if="creator.tag">BattleTag: <span class="name">{{ creator.tag }}</span></span>
+      <span class="social-tag" v-if="creator.twitter">
+        Twitter:
+        <a
+          rel="noopener"
+          :href="`https://twitter.com/${creator.twitter}`"
+          target="_blank"
+          class="name"
+        >{{ creator.twitter }}</a>
+      </span>
+    </section>
+    <section class="box">
+      <h1 class="title">Creations</h1>
+      <CreationsList :creations="creator.creations"/>
+    </section>
   </div>
-
 </template>
+
+<style scoped lang="scss">
+  @import "~@/assets/styles/elements";
+
+  .social-tag {
+    display: block;
+    font-weight: bold;
+
+    .name {
+      font-weight: normal;
+    }
+  }
+</style>
 
 <script>
   import api from "@/assets/api";
@@ -26,6 +52,7 @@ query getCreator($id:ID!) {
   `;
 
   export default {
+    layout: "secondLevel",
     components: { CreationsList },
     async asyncData(ctx) {
       return {
@@ -34,7 +61,3 @@ query getCreator($id:ID!) {
     }
   };
 </script>
-
-<style scoped lang="scss">
-
-</style>

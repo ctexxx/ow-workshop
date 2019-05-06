@@ -7,7 +7,7 @@
   flex-flow: row;
   flex-wrap: wrap;
   align-items: flex-start;
-  align-content: stretch;
+  align-content: flex-start;
 
   padding: 0;
 
@@ -27,6 +27,7 @@
   padding: 40px;
 
   flex-grow: 1;
+  flex-basis: 0;
   min-width: fit-content;
 
   & > .title {
@@ -52,4 +53,17 @@
   margin: 20px 0;
 
   border: 1px solid $gray;
+}
+
+a {
+  color: $link;
+  text-decoration: none;
+  padding: 0 2px;
+
+  transition: 200ms linear, background-color, 150ms linear color;
+
+  &:focus, &:hover {
+    background-color: $link;
+    color: white;
+  }
 }

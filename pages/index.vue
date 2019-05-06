@@ -41,13 +41,6 @@
 
   .box-container {
     flex-flow: row-reverse;
-    flex-wrap: wrap;
-    align-items: flex-start;
-    align-content: stretch;
-  }
-
-  .box {
-    flex-basis: 0;
   }
 
   .content-section {

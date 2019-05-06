@@ -58,8 +58,6 @@
 
       & > a {
         font-weight: bold;
-        text-decoration: none;
-        color: $link;
       }
     }
   }

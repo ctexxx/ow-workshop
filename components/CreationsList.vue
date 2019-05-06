@@ -28,7 +28,9 @@
       padding: 10px;
       cursor: pointer;
 
-      &:not(:last-child) {
+      border-top: 1px solid $gray;
+
+      &:last-child {
         border-bottom: 1px solid $gray;
       }
 
