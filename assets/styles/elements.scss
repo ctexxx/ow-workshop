@@ -28,7 +28,7 @@
   flex-grow: 1;
   flex-basis: 0;
 
-  & > .title {
+  & .box-title {
     background-color: inherit;
 
     font-weight: bold;
@@ -37,7 +37,7 @@
     margin: 0 0 20px;
   }
 
-  & > .subtitle {
+  & .box-subtitle {
     font-weight: bold;
     font-size: 1.4rem;
 
@@ -59,15 +59,6 @@
   border: 1px solid $gray;
 }
 
-a {
-  color: $link;
-  text-decoration: none;
-  padding: 0 2px;
-
-  transition: 200ms linear, background-color, 150ms linear color;
-
-  &:focus, &:hover {
-    background-color: $link;
-    color: white;
-  }
+.full-width {
+  width: 100%;
 }

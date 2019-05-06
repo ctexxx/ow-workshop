@@ -3,7 +3,7 @@
     <div class="left-column">
       <section class="box information-section">
         <CategoryBadge :category="creation.category"/>
-        <h1 class="title">{{ creation.title }}</h1>
+        <h1 class="box-title">{{ creation.title }}</h1>
         <span class="creator">
       by
         <template v-if="creation.creator !== null">
@@ -17,7 +17,7 @@
       </span>
       </section>
       <section class="box video-section" v-if="creation.video !== null">
-        <h1 class="title">Video</h1>
+        <h1 class="box-title">Video</h1>
         <div class="video-container">
           <iframe
             class="video-iframe"
@@ -31,7 +31,7 @@
       </section>
     </div>
     <section class="box description-section">
-      <h1 class="title">Description</h1>
+      <h1 class="box-title">Description</h1>
       <RenderMarkdown
         class="description"
         :source="processedDescription"
@@ -68,7 +68,7 @@
   .video-section {
     padding: 1%;
 
-    .title {
+    .box-title {
       border-radius: inherit;
       padding: 30px 30px 0;
     }

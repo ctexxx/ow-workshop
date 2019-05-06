@@ -28,6 +28,15 @@ body {
   }
 }
 
-.full-width {
-  width: 100%;
+a {
+  color: $link;
+  text-decoration: none;
+  padding: 0 2px;
+
+  transition: 200ms linear, background-color, 150ms linear color;
+
+  &:focus, &:hover {
+    background-color: $link;
+    color: white;
+  }
 }

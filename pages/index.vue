@@ -1,14 +1,14 @@
 <template>
   <main class="box-container">
     <section class="box filter-section">
-      <h1 class="title">Filter</h1>
-      <h2 class="subtitle">
-        Search (title or code)
-      </h2>
+      <h1 class="box-title">Filter</h1>
       <label class="input">
+        <span class="box-subtitle">
+          Search (title or code)
+        </span>
         <input type="text" v-model="search" class="full-width"/>
       </label>
-      <h2 class="subtitle">
+      <h2 class="box-subtitle">
         Category
       </h2>
       <label class="input">
@@ -26,14 +26,14 @@
       </label>
     </section>
     <section class="box content-section">
-      <h1 class="title">Creations</h1>
+      <h1 class="box-title">Creations</h1>
       <CreationsList :creations="creations"/>
       <SimpleButton :disabled="loading || allLoaded" class="button" @click="loadNext()">
         {{ buttonText }}<LoadingCircle class="loading-circle" v-show="loading" color="#555555"/>
       </SimpleButton>
     </section>
     <section class="box submit-section">
-      <h1 class="title">Submit yours</h1>
+      <h1 class="box-title">Submit yours</h1>
       <p>Use <a rel="noopener" href="https://forms.gle/i4EawBQoXeks3Jtt9">this form</a>.</p>
       <p>
         Or, if you have a GitHub account, please
@@ -59,7 +59,7 @@
       margin: 10px auto;
     }
 
-    .title {
+    .box-title {
       .loading-circle {
         --size: 1.5rem;
         margin-left: 15px;
@@ -72,6 +72,10 @@
   .filter-section {
     @include minWidthIfAvailable(360px);
     flex-grow: 1;
+
+    .input > .box-subtitle ~ input {
+      margin-top: 20px;
+    }
 
     .separator {
       margin: 10px 0 20px;

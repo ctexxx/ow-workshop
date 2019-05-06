@@ -1,6 +1,7 @@
 <template>
   <ul class="creations-list">
     <li
+      tabindex="0"
       v-for="creation in creations"
       :key="creation.code"
       @click="$router.push(`/c/${creation.code}`)"
@@ -28,6 +29,7 @@
       padding: 10px;
       cursor: pointer;
 
+      outline: none;
       border-top: 1px solid $gray;
 
       &:last-child {
@@ -40,7 +42,7 @@
       }
 
       transition: 200ms ease background-color;
-      &:hover {
+      &:hover, &:focus {
         background-color: rgba(0, 0, 0, 0.05);
       }
     }

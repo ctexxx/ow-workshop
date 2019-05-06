@@ -1,7 +1,7 @@
 export default Object.freeze({
   Alternative: {
     displayName: "Alternative",
-    backgroundColor: "#ff3643",
+    backgroundColor: "#cc3740",
     color: "white",
     description: "Alternative way to play a built-in Overwatch game mode"
   },

@@ -1,7 +1,7 @@
 <template>
   <div class="box-container">
     <section class="box information-section">
-      <h1 class="title">Information</h1>
+      <h1 class="box-title">Information</h1>
       <span class="social-tag" v-if="creator.tag">BattleTag: <span class="name">{{ creator.tag }}</span></span>
       <span class="social-tag" v-if="creator.twitter">
         Twitter:
@@ -14,7 +14,7 @@
       </span>
     </section>
     <section class="box creations-section">
-      <h1 class="title">Creations</h1>
+      <h1 class="box-title">Creations</h1>
       <CreationsList :creations="creator.creations"/>
     </section>
   </div>
