@@ -5,16 +5,17 @@
         <CategoryBadge :category="creation.category"/>
         <h1 class="box-title">{{ creation.title }}</h1>
         <span class="creator">
-      by
-        <template v-if="creation.creator !== null">
-        <nuxt-link :to="`/creator/${creation.creator.id}`">
-          {{ creation.creator.tag || "@" + creation.creator.twitter }}
-        </nuxt-link>
-        </template>
-        <template v-else>
-          Anonymous
-        </template>
-      </span>
+        by
+          <template v-if="creation.creator !== null">
+            <nuxt-link :to="`/creator/${creation.creator.id}`">
+              {{ creation.creator.tag || "@" + creation.creator.twitter }}
+            </nuxt-link>
+          </template>
+          <template v-else>
+            Anonymous
+          </template>
+        </span>
+        <span class="code">Code: {{ creation.code }}</span>
       </section>
       <section class="box video-section" v-if="creation.video !== null">
         <h1 class="box-title">Video</h1>
@@ -56,6 +57,14 @@
   }
 
   .information-section {
+    .code {
+      display: block;
+      font-family: monospace;
+      font-size: 1.5rem;
+
+      margin-top: 20px;
+    }
+
     .creator {
       display: block;
 
