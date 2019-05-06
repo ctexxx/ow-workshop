@@ -52,7 +52,7 @@
   @import "~@/assets/styles/mixins";
 
   .content-section {
-    @include minWidthIfAvailable(360px);
+    @include minWidthIfAvailable(360px, 40px);
     flex-grow: 3;
 
     .button {
@@ -70,7 +70,7 @@
   }
 
   .filter-section {
-    @include minWidthIfAvailable(360px);
+    @include minWidthIfAvailable(360px, 40px);
     flex-grow: 1;
 
     .input > .box-subtitle ~ input {

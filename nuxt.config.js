@@ -1,21 +1,11 @@
-import pkg from './package'
-
 export default {
   mode: 'spa',
-  generate: {
-    fallback: true
-  },
 
   /*
   ** Headers of the page
   */
   head: {
-    title: "OW Workshop Search",
-    meta: [
-      { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: pkg.description }
-    ],
+    title: "Overwatch Workshop Search",
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Montserrat' }
@@ -46,6 +36,23 @@ export default {
   modules: [
     '@nuxtjs/pwa',
   ],
+
+  workbox: {
+    importScripts: [
+      "fontSW.js"
+    ]
+  },
+
+  manifest: {
+    nativeUI: false,
+    name: "Overwatch Workshop Search",
+    description: "Find cool workshop codes for Overwatch",
+    themeColor: "#6cee7e",
+    "background_color": "#6cee7e",
+    author: "Moritz Ruth",
+    twitterCreator: "cte3x",
+    twitterSite: "cte3x"
+  },
 
   /*
   ** Build configuration
