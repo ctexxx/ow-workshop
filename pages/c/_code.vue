@@ -16,6 +16,9 @@
           </template>
         </span>
         <span class="code">Code: {{ creation.code }}</span>
+        <SimpleButton class="copy-code full-width" @click="copyCode" :disabled="this.copiedTimeout !== null">
+          {{ this.copiedTimeout === null ? "Copy" : "Copied!" }}
+        </SimpleButton>
       </section>
       <section class="box video-section" v-if="creation.video !== null">
         <h1 class="box-title">Video</h1>
@@ -63,6 +66,12 @@
       font-size: 1.5rem;
 
       margin-top: 20px;
+    }
+
+    .copy-code {
+      margin-top: 20px;
+      height: 40px;
+      font-size: 1rem;
     }
 
     .creator {
@@ -140,6 +149,7 @@
   import categoryMeta from "@/assets/categoryMeta";
   import CategoryBadge from "@/components/CategoryBadge";
   import LoadingCircle from "@/components/LoadingCircle";
+  import SimpleButton from "@/components/SimpleButton";
 
   const getCreationQuery = `
 query getCreation($code: String!) {
@@ -160,18 +170,37 @@ query getCreation($code: String!) {
 
   export default {
     layout: "secondLevel",
-    components: { LoadingCircle, CategoryBadge, RenderMarkdown },
+    components: { SimpleButton, LoadingCircle, CategoryBadge, RenderMarkdown },
+    beforeDestroy() {
+      if(this.copiedTimeout !== null) {
+        clearTimeout(this.copiedTimeout);
+      }
+    },
     async asyncData (ctx) {
       return {
         creation: (await api.request(getCreationQuery, { code: ctx.route.params.code })).Creation
       };
     },
     data: () => ({
-      videoLoaded: false
+      videoLoaded: false,
+      copiedTimeout: null
     }),
     computed: {
       processedDescription () {
         return this.creation.description.replace(/\\n/g, "\n");
+      }
+    },
+    methods: {
+      copyCode() {
+        this.$copyText(this.creation.code).then(() => {
+          if(this.copiedTimeout !== null) {
+            clearTimeout(this.copiedTimeout);
+          }
+
+          this.copiedTimeout = setTimeout(() => {
+            this.copiedTimeout = null;
+          }, 2000)
+        });
       }
     },
     categoryMeta
