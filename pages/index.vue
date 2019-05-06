@@ -32,6 +32,17 @@
         {{ buttonText }}<LoadingCircle class="loading-circle" v-show="loading" color="#555555"/>
       </SimpleButton>
     </section>
+    <section class="box submit-section">
+      <h1 class="title">Submit yours</h1>
+      <p>Use <a rel="noopener" href="https://forms.gle/i4EawBQoXeks3Jtt9">this form</a>.</p>
+      <p>
+        Or, if you have a GitHub account, please
+        <a
+          rel="noopener"
+          href="https://github.com/ctexxx/ow-workshop/issues/new?labels=submission&title=Submission%20[TITLE]&template=submission.md"
+        >create an issue</a>.
+      </p>
+    </section>
   </main>
 </template>
 
@@ -40,11 +51,9 @@
   @import "~@/assets/styles/inputs";
 
   .box-container {
-    flex-flow: row-reverse;
   }
 
   .content-section {
-    order: 2;
     flex-grow: 3;
 
     .button {
@@ -62,12 +71,15 @@
   }
 
   .filter-section {
-    order: 1;
     flex-grow: 1;
 
     .separator {
       margin: 10px 0 20px;
     }
+  }
+
+  .submit-section {
+    flex-grow: 1;
   }
 </style>
 
