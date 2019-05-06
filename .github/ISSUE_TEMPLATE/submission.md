@@ -8,7 +8,7 @@
 _You can use markdown here._
 
 ## Creator
-_You can remove this section if you don’t want your information to be displayed on the page._
+_You can remove this section if you don’t want your information to be displayed._
 - Battle tag:
 - Twitter:
-- YouTube: _Channel ID (youtube.com/channel/**THIS PART**)_
+- YouTube Channel:
