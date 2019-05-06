@@ -37,10 +37,14 @@
     <section class="box description-section">
       <h1 class="box-title">Description</h1>
       <RenderMarkdown
+        v-if="creation.description !== null && creation.description !== ''"
         class="description"
         :source="processedDescription"
         :anchorAttributes="{rel: 'noopener', target: '_blank'}"
       />
+      <template v-else>
+        <i>No description</i>
+      </template>
     </section>
   </div>
 </template>
