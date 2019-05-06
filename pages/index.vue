@@ -49,11 +49,10 @@
 <style lang="scss">
   @import "~@/assets/styles/elements";
   @import "~@/assets/styles/inputs";
-
-  .box-container {
-  }
+  @import "~@/assets/styles/mixins";
 
   .content-section {
+    @include minWidthIfAvailable(360px);
     flex-grow: 3;
 
     .button {
@@ -71,6 +70,7 @@
   }
 
   .filter-section {
+    @include minWidthIfAvailable(360px);
     flex-grow: 1;
 
     .separator {
@@ -79,6 +79,7 @@
   }
 
   .submit-section {
+    @include minWidthIfAvailable(200px);
     flex-grow: 1;
   }
 </style>

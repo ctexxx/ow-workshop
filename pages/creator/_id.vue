@@ -1,6 +1,6 @@
 <template>
   <div class="box-container">
-    <section class="box">
+    <section class="box information-section">
       <h1 class="title">Information</h1>
       <span class="social-tag" v-if="creator.tag">BattleTag: <span class="name">{{ creator.tag }}</span></span>
       <span class="social-tag" v-if="creator.twitter">
@@ -13,7 +13,7 @@
         >{{ creator.twitter }}</a>
       </span>
     </section>
-    <section class="box">
+    <section class="box creations-section">
       <h1 class="title">Creations</h1>
       <CreationsList :creations="creator.creations"/>
     </section>
@@ -23,13 +23,21 @@
 <style scoped lang="scss">
   @import "~@/assets/styles/elements";
 
-  .social-tag {
-    display: block;
-    font-weight: bold;
+  .information-section {
+    flex-grow: 1;
 
-    .name {
-      font-weight: normal;
+    .social-tag {
+      display: block;
+      font-weight: bold;
+
+      .name {
+        font-weight: normal;
+      }
     }
+  }
+
+  .creations-section {
+    flex-grow: 2;
   }
 </style>
 

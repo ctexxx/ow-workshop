@@ -1,0 +1,5 @@
+@mixin minWidthIfAvailable($width, $required: $width) {
+  @media screen and (min-width: $required) {
+    min-width: $width;
+  }
+}

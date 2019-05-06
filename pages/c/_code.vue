@@ -44,15 +44,15 @@
 <style scoped lang="scss">
   @import "~@/assets/styles/elements";
   @import "~@/assets/styles/variables";
+  @import "~@/assets/styles/mixins";
 
   .left-column {
+    @include minWidthIfAvailable(300px);
     display: flex;
     flex-direction: column;
 
     flex-grow: 1;
     flex-basis: 0;
-
-    min-width: 300px;
   }
 
   .information-section {
@@ -110,7 +110,7 @@
   }
 
   .description-section {
-    flex-grow: 1;
+    flex-grow: 2;
 
     .description {
       $h1-size: 1.3rem;
