@@ -41,8 +41,7 @@
       transition: $transition-duration ease;
       transition-property: background-color, color;
       &:hover {
-        background-color: $secondary;
-        color: white;
+        background-color: rgba(0,0,0,0.10);
 
         .arrow {
           transform: translateX(-5px);
