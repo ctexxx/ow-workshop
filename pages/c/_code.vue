@@ -21,9 +21,12 @@
         <div class="video-container">
           <iframe
             class="video-iframe"
+            :class="{loaded: videoLoaded}"
             width="640" height="360"
             :src="`http://www.youtube.com/embed/${creation.video}`"
+            @load="videoLoaded = true"
           ></iframe>
+          <LoadingCircle class="video-loading"/>
         </div>
       </section>
     </div>
@@ -78,6 +81,7 @@
       height: auto;
 
       .video-iframe {
+        z-index: 1;
         position: absolute;
         top: 0;
         left: 0;
@@ -86,6 +90,21 @@
         max-width: 100%;
 
         border: none;
+
+        transition: opacity 200ms ease-in 200ms;
+        opacity: 0;
+        &.loaded {
+          opacity: 1;
+        }
+      }
+
+      .video-loading {
+        $size: 40px;
+
+        --size: #{$size} !important;
+        position: absolute;
+        top: calc(50% - #{$size} / 2);
+        left: calc(50% - #{$size} / 2);
       }
     }
   }
@@ -111,6 +130,7 @@
   import RenderMarkdown from "vue-markdown";
   import categoryMeta from "@/assets/categoryMeta";
   import CategoryBadge from "@/components/CategoryBadge";
+  import LoadingCircle from "@/components/LoadingCircle";
 
   const getCreationQuery = `
 query getCreation($code: String!) {
@@ -131,15 +151,15 @@ query getCreation($code: String!) {
 
   export default {
     layout: "secondLevel",
-    components: {
-      CategoryBadge,
-      RenderMarkdown
-    },
+    components: { LoadingCircle, CategoryBadge, RenderMarkdown },
     async asyncData (ctx) {
       return {
         creation: (await api.request(getCreationQuery, { code: ctx.route.params.code })).Creation
       };
     },
+    data: () => ({
+      videoLoaded: false
+    }),
     computed: {
       processedDescription () {
         return this.creation.description.replace(/\\n/g, "\n");
