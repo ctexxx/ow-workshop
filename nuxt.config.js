@@ -50,6 +50,7 @@ export default {
   manifest: {
     nativeUI: false,
     name: "Overwatch Workshop Search",
+    "short_name": "OW Workshop",
     description: "Find cool workshop codes for Overwatch",
     themeColor: "#6cee7e",
     "background_color": "#6cee7e",
