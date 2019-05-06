@@ -1,6 +1,6 @@
 <template>
-  <span class="category-badge" :style="style">
-    {{ text }}
+  <span class="category-badge" :style="style" :title="meta.description">
+    {{ meta.displayName }}
   </span>
 </template>
 
@@ -32,8 +32,8 @@
         const { backgroundColor, color } = categoryMeta[this.category];
         return { backgroundColor, color: color || "black" };
       },
-      text() {
-        return categoryMeta[this.category].displayName;
+      meta() {
+        return categoryMeta[this.category];
       }
     }
   };
