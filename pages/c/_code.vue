@@ -37,7 +37,7 @@
     <section class="box description-section">
       <h1 class="box-title">Description</h1>
       <RenderMarkdown
-        v-if="creation.description !== null && creation.description !== ''"
+        v-if="creation.description !== null"
         class="description"
         :source="processedDescription"
         :anchorAttributes="{rel: 'noopener', target: '_blank'}"
@@ -191,7 +191,9 @@ query getCreation($code: String!) {
     }),
     computed: {
       processedDescription () {
-        return this.creation.description.replace(/\\n/g, "\n");
+        if(this.creation.description !== null) {
+          return this.creation.description.replace(/\\n/g, "\n");
+        }
       }
     },
     methods: {
