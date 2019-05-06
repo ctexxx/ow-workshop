@@ -23,7 +23,7 @@
             class="video-iframe"
             :class="{loaded: videoLoaded}"
             width="640" height="360"
-            :src="`http://www.youtube.com/embed/${creation.video}`"
+            :src="`https://www.youtube.com/embed/${creation.video}`"
             @load="videoLoaded = true"
           ></iframe>
           <LoadingCircle class="video-loading"/>
@@ -103,7 +103,7 @@
 
         --size: #{$size} !important;
         position: absolute;
-        top: calc(50% - #{$size} / 2);
+        top: calc(40% - #{$size} / 2);
         left: calc(50% - #{$size} / 2);
       }
     }
