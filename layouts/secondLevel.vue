@@ -1,24 +1,28 @@
 <template>
-  <div>
+  <div class="layout">
     <div class="top-bar">
       <button class="back-button" @click="$router.push('/')">
         <span class="arrow"></span>
         Back
       </button>
     </div>
-    <nuxt/>
+    <div class="content">
+      <nuxt/>
+    </div>
   </div>
 </template>
 
 <style scoped lang="scss">
   @import "~@/assets/styles/variables";
 
+  $top-bar-height: 60px;
+
   .top-bar {
     z-index: 3;
     position: sticky;
     top: 0;
 
-    height: 60px;
+    height: $top-bar-height;
     width: 100%;
 
     background: $primary;
@@ -82,5 +86,9 @@
         }
       }
     }
+  }
+
+  .content {
+    height: calc(100% - #{$top-bar-height});
   }
 </style>

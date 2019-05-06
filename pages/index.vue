@@ -42,6 +42,7 @@
           href="https://github.com/ctexxx/ow-workshop/issues/new?labels=submission&title=Submission%20[TITLE]&template=submission.md"
         >create an issue</a>.
       </p>
+      <small><nuxt-link to="/disclaimer">Disclaimer and Notice of Non-Affiliation</nuxt-link></small>
     </section>
   </main>
 </template>
