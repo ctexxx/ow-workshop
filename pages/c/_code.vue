@@ -181,9 +181,24 @@ query getCreation($code: String!) {
       }
     },
     async asyncData (ctx) {
-      return {
-        creation: (await api.request(getCreationQuery, { code: ctx.route.params.code })).Creation
-      };
+      if(ctx.route.params.code) {
+        const creation = (await api.request(getCreationQuery, { code: ctx.route.params.code })).Creation;
+
+        if(creation) {
+          return {
+            creation
+          };
+        } else {
+          ctx.error({
+            statusCode: 404,
+            displayMessage: "This creation could not be found."
+          });
+        }
+      } else {
+        ctx.error({
+          statusCode: 404
+        });
+      }
     },
     data: () => ({
       videoLoaded: false,

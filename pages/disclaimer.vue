@@ -1,6 +1,6 @@
 <template>
   <main class="box-container center">
-    <section class="box">
+    <section class="box small">
       <h1 class="box-title">Notice of Non-Affiliation</h1>
       This project is not affiliated, associated, authorized, endorsed by, or in any way officially connected with Blizzard or Overwatch.
 
@@ -13,8 +13,6 @@
   @import "~@/assets/styles/elements";
 
   .box {
-    max-width: 400px;
-
     &:not(.box-title) {
       font-family: monospace;
       font-size: 1.2rem;

@@ -44,7 +44,8 @@ export default {
   workbox: {
     importScripts: [
       "fontSW.js"
-    ]
+    ],
+    offline: false
   },
 
   manifest: {
